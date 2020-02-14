@@ -3,19 +3,9 @@ Transformer on a Diet
 
 Reference: C Wang, Z Ye, A Zhang, Z Zhang, A Smola. "`Transformer on a Diet <https://arxiv.org/abs>`_". arXiv preprint arXiv (2020).
 
-The results and the command line to reproduce the results on PTB dataset are in the following table.
+The results and the command line to reproduce the results on PTB dataset are as follows.
 
 .. editing URL for the following table: https://tinyurl.com/w62s5s9
-
-+----------+--------+---------+----------------+----------
-| Model    | Full   | Dilated | Dilated-Memory | Cascade
-+----------+--------+---------+----------------+----------
-| Val PPL  | 109.19 | 115.67  | 115.35         | 109.16
-+----------+--------+---------+----------------+----------
-| Test PPL | 103.72 | 110.92  | 110.98         | 105.27
-+----------+--------+---------+----------------+----------
-| Command  | [1]    | [2]     | [3]            | [4]
-+----------+--------+---------+----------------+----------
 
 [1] Full (Val PPL 109.19 Test PPL 103.72)
 
