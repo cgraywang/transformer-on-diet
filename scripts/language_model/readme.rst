@@ -1,7 +1,7 @@
 Transformer on a Diet
 -----------------------------------
 
-Reference: C Wang, Z Ye, A Zhang, Z Zhang, A Smola. "`Transformer on a Diet <https://arxiv.org/abs>`_". arXiv preprint arXiv (2020).
+Reference: C Wang, Z Ye, A Zhang, Z Zhang, A Smola. "`Transformer on a Diet <https://arxiv.org/abs/2002.06170>`_". arXiv preprint arXiv (2020).
 
 The results and the command line to reproduce the results on PTB dataset are as follows.
 
@@ -36,7 +36,7 @@ Note that the command to reproduce the results on wikitext-2 would be updated so
 Reference Paper
 ~~~~~~~~~~~~~~~~
 
-The bibtext entry of the `reference paper <https://arxiv.org/abs>`_ is:
+The bibtext entry of the `reference paper <https://arxiv.org/abs/2002.06170>`_ is:
 
 .. code::
 
@@ -45,5 +45,5 @@ The bibtext entry of the `reference paper <https://arxiv.org/abs>`_ is:
       author={Chenguang Wang and Zihao Ye and Aston Zhang and Zheng Zhang and Alexander J. Smola},
       journal={ArXiv},
       year={2020},
-      volume={abs}
+      volume={abs/2002.06170}
    }
