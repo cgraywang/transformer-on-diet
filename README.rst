@@ -1,165 +1,65 @@
-.. raw:: html
+Transformer on a Diet
+-----------------------------------
 
-   <a href="http://gluon-nlp.mxnet.io/master/index.html"><p align="center"><img width="25%" src="docs/_static/gluon_s2.png" /></a>
-   </p>
-
-.. raw:: html
-
-   <h3 align="center">
-
-GluonNLP: Your Choice of Deep Learning for NLP
-
-.. raw:: html
-
-   </h3>
-
-.. raw:: html
-
-   <a href='http://ci.mxnet.io/job/gluon-nlp/job/master/'><img src='https://img.shields.io/badge/python-2.7%2C%203.6-blue.svg'></a>
-   <a href='https://codecov.io/gh/dmlc/gluon-nlp'><img src='https://codecov.io/gh/dmlc/gluon-nlp/branch/master/graph/badge.svg'></a>
-   <a href='http://ci.mxnet.io/job/gluon-nlp/job/master/'><img src='http://ci.mxnet.io/job/gluon-nlp/job/master/badge/icon'></a>
-   <a href='https://pypi.org/project/gluonnlp/#history'><img src='https://img.shields.io/pypi/v/gluonnlp.svg'></a>
-
-GluonNLP is a toolkit that enables easy text preprocessing, datasets
-loading and neural models building to help you speed up your Natural
-Language Processing (NLP) research.
-
-- `Quick Start Guide <https://github.com/dmlc/gluon-nlp#quick-start-guide>`__
-- `Resources <https://github.com/dmlc/gluon-nlp#resources>`__
-
-News
-====
-
-- GluonNLP was featured in **KDD 2018 London, Apache MXNet Gluon tutorial**! Check out **https://kdd18.mxnet.io**.
+Reference: C Wang, Z Ye, A Zhang, Z Zhang, A Smola. "`Transformer on a Diet <https://arxiv.org/abs/2002.06170>`_". arXiv preprint arXiv (2020).
 
 Installation
-============
+~~~~~~~~~~~~~~~~
 
-Make sure you have Python 2.7 or Python 3.6 and recent version of MXNet.
-You can install ``MXNet`` and ``GluonNLP`` using pip:
-
-::
+.. code::
 
     pip install --pre --upgrade mxnet
-    pip install gluonnlp
+    python setup.py install
 
-Docs 📖
-=======
+Results
+~~~~~~~~~~~~~~~~
 
-GluonNLP documentation is available at `our
-website <http://gluon-nlp.mxnet.io/master/index.html>`__.
+The results and the command line to reproduce the results on PTB dataset are as follows.
 
-Community
-=========
+.. editing URL for the following table: https://tinyurl.com/w62s5s9
 
-GluonNLP is a community that believes in sharing.
+[1] Full (Val PPL 109.19 Test PPL 103.72)
 
-For questions, comments, and bug reports, `Github issues <https://github.com/dmlc/gluon-nlp/issues>`__ is the best way to reach us.
+.. code-block:: console
 
-We now have a new Slack channel `here <https://apache-mxnet.slack.com/messages/CCCDM10V9>`__.
-(`register <https://join.slack.com/t/apache-mxnet/shared_invite/enQtNDIzNjY0NjQ2NjYyLTI1ZGNiOGEwOTZkMzMyOTg2ZjNkOWQyNjA5NGRhOTI5NDY4MDY0NmE1MDc2NjEzYWQ1MDZhNzU2NjE5YTMyYTA>`__).
+   $ cd scripts/language_model/
+   $ python transformer_language_model.py --model full --data ptb --emsize 320 --nhid 2000 --nlayers 3 --lr 10 --epochs 500 --batch_size 20 --bptt 70 --dropout 0.4 --dropout_h 0.25 --dropout_i 0 --dropout_e 0 --weight_drop 0 --tied --alpha 0 --beta 0 --lr_update_interval 100 --lr_update_factor 1 --num_heads 16 --scaled --units 320 --use_residual --max_src_length 1000 --warmup_steps 0 --first_window_size 1 --kernel_size 3 --d_base 2
 
-How to Contribute
-=================
+[2] Dilated (Val PPL 115.67 Test PPL 110.92)
 
-GluonNLP community welcomes contributions from anyone!
+.. code-block:: console
 
-There are lots of opportunities for you to become our `contributors <https://github.com/dmlc/gluon-nlp/blob/master/contributor.rst>`__:
+   $ cd scripts/language_model/
+   $ python transformer_language_model.py --model dilated --data ptb --emsize 320 --nhid 2000 --nlayers 3 --lr 10 --epochs 500 --batch_size 20 --bptt 70 --dropout 0.4 --dropout_h 0.25 --dropout_i 0 --dropout_e 0 --weight_drop 0 --tied --alpha 0 --beta 0 --lr_update_interval 100 --lr_update_factor 1 --num_heads 16 --scaled --units 320 --use_residual --max_src_length 1000 --warmup_steps 0 --first_window_size 1 --kernel_size 3 --d_base 2
 
-- Ask or answer questions on `GitHub issues <https://github.com/dmlc/gluon-nlp/issues>`__.
-- Propose ideas, or review proposed design ideas on `GitHub issues <https://github.com/dmlc/gluon-nlp/issues>`__.
-- Improve the `documentation <http://gluon-nlp.mxnet.io/master/index.html>`__.
-- Contribute bug reports `GitHub issues <https://github.com/dmlc/gluon-nlp/issues>`__.
-- Write new `scripts <https://github.com/dmlc/gluon-nlp/tree/master/scripts>`__ to reproduce
-  state-of-the-art results.
-- Write new `examples <https://github.com/dmlc/gluon-nlp/tree/master/docs/examples>`__ to explain
-  key ideas in NLP methods and models.
-- Write new `public datasets <https://github.com/dmlc/gluon-nlp/tree/master/gluonnlp/data>`__
-  (license permitting).
-- Most importantly, if you have an idea of how to contribute, then do it!
+[3] Dilated-Memory (Val PPL 115.35 Test PPL 110.98)
 
-For a list of open starter tasks, check `good first issues <https://github.com/dmlc/gluon-nlp/labels/good%20first%20issue>`__.
+.. code-block:: console
 
-Also see our `contributing
-guide <http://gluon-nlp.mxnet.io/master/how_to/contribute.html>`__ on simple how-tos,
-contribution guidelines and more.
+   $ cd scripts/language_model/
+   $ python transformer_language_model.py --model dilated_mem --data ptb --emsize 320 --nhid 2000 --nlayers 3 --lr 10 --epochs 500 --batch_size 20 --bptt 70 --dropout 0.4 --dropout_h 0.25 --dropout_i 0 --dropout_e 0 --weight_drop 0 --tied --alpha 0 --beta 0 --lr_update_interval 100 --lr_update_factor 1 --num_heads 16 --scaled --units 320 --use_residual --max_src_length 1000 --warmup_steps 0 --first_window_size 1 --kernel_size 3 --d_base 2
 
-Resources
-=========
+[4] Cascade (Val PPL 109.16 Test PPL 105.27)
 
-Check out how to use GluonNLP for your own research or projects.
+.. code-block:: console
 
-If you are new to Gluon, please check out our `60-minute crash course
-<http://gluon-crash-course.mxnet.io/>`__.
+   $ cd scripts/language_model/
+   $ python transformer_language_model.py --model cascade --data ptb --emsize 320 --nhid 2000 --nlayers 3 --lr 10 --epochs 500 --batch_size 20 --bptt 70 --dropout 0.4 --dropout_h 0.25 --dropout_i 0 --dropout_e 0 --weight_drop 0 --tied --alpha 0 --beta 0 --lr_update_interval 100 --lr_update_factor 1 --num_heads 16 --scaled --units 320 --use_residual --max_src_length 1000 --warmup_steps 0 --first_window_size 4 --window_size_multiplier 2 --kernel_size 3 --d_base 2
 
-For getting started quickly, refer to notebook runnable examples at
-`Examples. <http://gluon-nlp.mxnet.io/master/examples/index.html>`__
+Note that the command to reproduce the results on wikitext-2 would be updated soon.
+And the repo would be cleaned further to contain only relevant modules.
 
-For advanced examples, check out our
-`Scripts. <http://gluon-nlp.mxnet.io/master/scripts/index.html>`__
+Reference Paper
+~~~~~~~~~~~~~~~~
 
-For experienced users, check out our
-`API Notes <http://gluon-nlp.mxnet.io/master/api/index.html>`__.
+The bibtext entry of the `reference paper <https://arxiv.org/abs/2002.06170>`_ is:
 
-Quick Start Guide
-=================
+.. code::
 
-`Dataset Loading <http://gluon-nlp.mxnet.io/master/api/data.html>`__
--------------------------------------------------------------------------------------
-
-Load the Wikitext-2 dataset, for example:
-
-.. code:: python
-
-    >>> import gluonnlp as nlp
-    >>> train = nlp.data.WikiText2(segment='train')
-    >>> train[0][0:5]
-    ['=', 'Valkyria', 'Chronicles', 'III', '=']
-
-`Vocabulary Construction <http://gluon-nlp.mxnet.io/master/api/vocab.html>`__
----------------------------------------------------------------------------------
-
-Build vocabulary based on the above dataset, for example:
-
-.. code:: python
-
-    >>> vocab = nlp.Vocab(counter=nlp.data.Counter(train[0]))
-    >>> vocab
-    Vocab(size=33280, unk="<unk>", reserved="['<pad>', '<bos>', '<eos>']")
-
-`Neural Models Building <http://gluon-nlp.mxnet.io/master/api/model.html>`__
------------------------------------------------------------------------------------
-
-From the models package, apply a Standard RNN language model to the
-above dataset:
-
-.. code:: python
-
-    >>> model = nlp.model.language_model.StandardRNN('lstm', len(vocab),
-    ...                                              200, 200, 2, 0.5, True)
-    >>> model
-    StandardRNN(
-      (embedding): HybridSequential(
-        (0): Embedding(33280 -> 200, float32)
-        (1): Dropout(p = 0.5, axes=())
-      )
-      (encoder): LSTM(200 -> 200.0, TNC, num_layers=2, dropout=0.5)
-      (decoder): HybridSequential(
-        (0): Dense(200 -> 33280, linear)
-      )
-    )
-
-`Word Embeddings Loading <http://gluon-nlp.mxnet.io/master/api/embedding.html>`__
----------------------------------------------------------------------------------
-
-For example, load a GloVe word embedding, one of the state-of-the-art
-English word embeddings:
-
-.. code:: python
-
-    >>> glove = nlp.embedding.create('glove', source='glove.6B.50d')
-    # Obtain vectors for 'baby' in the GloVe word embedding
-    >>> type(glove['baby'])
-    <class 'mxnet.ndarray.ndarray.NDArray'>
-    >>> glove['baby'].shape
-    (50,)
+   @article{transformerdiet2020,
+      title={Transformer on a Diet},
+      author={Chenguang Wang and Zihao Ye and Aston Zhang and Zheng Zhang and Alexander J. Smola},
+      journal={ArXiv},
+      year={2020},
+      volume={abs/2002.06170}
+   }
